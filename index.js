@@ -1,17 +1,11 @@
 const express = require("express");
 const app = express();
-const Crawler = require("Crawler");
+const puppeteerLookup = require("./puppeteerLookup");
 require("dotenv").config();
 
 const port = process.env.PORT || 8000;
 
-app.get("/", (req, res) => {
-  var c = new Crawler({
-    address: "http://www.example.com",
-    term: "example",
-  });
-  c.start();
-});
+app.use("/", puppeteerLookup);
 
 app.get("/scrape", (req, res) => {
   const browserObject = require("./browser");
