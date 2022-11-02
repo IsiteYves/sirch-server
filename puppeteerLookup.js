@@ -27,9 +27,12 @@ router.post("/:keyword", (req, res) => {
       const appearances = splits.filter((word) =>
         word.toLowerCase().includes(keyword.toLowerCase())
       ).length;
-      console.log(`appearances of the word '${keyword}' = `, appearances);
       await browser.close();
-      res.status(200).send({ splits });
+      res.status(200).send({
+        success: true,
+        message: `appearances of the word '${keyword}' = ${appearances}`,
+      });
+      // res.status(200).send({ splits });
     } catch (e) {
       return res.status(500).send({ error: e?.message });
     }
